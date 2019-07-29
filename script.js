@@ -6,14 +6,6 @@ const table = document.querySelector('#table');
 let rows = 0;
 let columns = 0;
 
-formSubmit.addEventListener('submit', (ev) => {
-  ev.preventDefault();
-  rows = inputRows.value;
-  columns =  inputCols.value;
-  //clearGrid();
-  makeGrid(rows, columns);
-});
-
 const makeGrid = (rows, columns) => {
 
   let numOfRows = document.querySelectorAll('#tableRow').length;
@@ -35,3 +27,20 @@ const makeGrid = (rows, columns) => {
     }
   }
 };
+
+const squareClicked = (ev) => {
+  if (event.target.className !== "") {
+    event.target.className = "";
+  } else {
+    event.target.className = 'red';
+  }
+};
+
+formSubmit.addEventListener('submit', (ev) => {
+  ev.preventDefault();
+  rows = inputRows.value;
+  columns =  inputCols.value;
+  makeGrid(rows, columns);
+});
+
+table.addEventListener('click', squareClicked);
