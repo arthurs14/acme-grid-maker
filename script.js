@@ -2,13 +2,10 @@ const formSubmit = document.querySelector('#form');
 const inputRows = document.querySelector('[name="rows"]');
 const inputCols = document.querySelector('[name="columns"]');
 const table = document.querySelector('#table');
+const indexes = document.querySelector('#squareIndex');
 
 let rows = 0;
 let columns = 0;
-
-let rowIdx = 0;
-let colIdx = 0;
-
 
 const makeGrid = (rows, columns) => {
 
@@ -20,6 +17,7 @@ const makeGrid = (rows, columns) => {
       table.deleteRow(numOfRows - 1);
       numOfRows--;
     }
+    indexes.innerHTML = '';
   }
 
   for (let i = 0; i < rows; i++) {
@@ -38,12 +36,17 @@ const makeGrid = (rows, columns) => {
 };
 
 const squareClicked = (ev) => {
+  const cell = ev.target;
+  const row = cell.parentNode;
+  const colIdx = [...row.children].indexOf(cell);
+  const rowIdx = [...row.parentNode.children].indexOf(row);
   if (event.target.className !== "") {
     event.target.className = "";
   } else {
     event.target.className = "red";
-    // rowIdx = grid.indexOf();
-    // console.log(rowIdx);
+    indexes.innerHTML = `Row Idx: ${rowIdx} Col Idx: ${colIdx}`;
+    // console.log('col: ', colIdx);
+    // console.log('row: ', rowIdx);
   }
 };
 
@@ -52,8 +55,7 @@ formSubmit.addEventListener('submit', (ev) => {
   rows = inputRows.value;
   columns =  inputCols.value;
   mainGrid = makeGrid(rows, columns);
-  console.log(mainGrid);
+  //console.log(mainGrid);
 });
 
 table.addEventListener('click', squareClicked);
-
