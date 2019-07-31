@@ -13,10 +13,7 @@ const makeGrid = (rows, columns) => {
   let grid = [];
 
   if (numOfRows) {
-    while (numOfRows > -1) {
-      table.deleteRow(numOfRows - 1);
-      numOfRows--;
-    }
+    table.innerHTML = '';
     indexes.innerHTML = '';
   }
 
